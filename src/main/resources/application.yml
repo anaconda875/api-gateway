@@ -20,10 +20,16 @@ spring:
             - Path=/product-ms/**
           filters:
             - StripPrefix=1
-#  security:
-#    oauth2:
-#      resource-server:
-#        jwt:
-#          jwk-set-uri: http://localhost:9990/realms/master/protocol/openid-connect/certs
+        - id: order
+          uri: lb://ORDER-MS
+          predicates:
+            - Path=/order-ms/**
+          filters:
+            - StripPrefix=1
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:9990/realms/master/protocol/openid-connect/certs
 server:
   port: 8987
